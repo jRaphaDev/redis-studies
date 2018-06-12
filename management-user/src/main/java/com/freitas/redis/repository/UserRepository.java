@@ -6,7 +6,7 @@ import java.util.Map;
 
 public interface UserRepository {
 
-    void save(User user);
+    User save(User user);
     User fidnOne(Long id);
     Map<Long, User> findAll();
     void update(User user);
