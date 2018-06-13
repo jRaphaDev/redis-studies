@@ -7,21 +7,35 @@ client.on('connect', () => {
     console.log('Redis Client connected')
 });
 
-function create(user) {
+const create = (user) => {
     return new Promise((resolve, reject) => {
         client.set(KEY, JSON.stringify(user), redis.print);
         return resolve(user);
     })
 }
 
-function findAll() {
-    return new Promise((resole, reject) => {
+const findOne = () => {
+    return new Promise((resolve, reject) => {
         client.get(KEY, (error, result) => {
+
             if (error)
                 return reject(error);
-            return resole(result);
+
+            return resolve(result);
         })
     })
 }
 
-module.exports = { create, findAll }
+const remove = () => {
+    return new Promise((resolve, reject) => {
+        client.del(KEY, (error, result) => {
+
+            if (error)
+                return reject(error)
+
+            return resolve(result)
+        })
+    })
+}
+
+module.exports = { create, findOne, remove }

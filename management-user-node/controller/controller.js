@@ -16,10 +16,11 @@ function create(req, res) {
         .catch(error => {
             return res.status(500).send(error)
         });
-    
+
 }
 
-function findAll(req, res) {
+function findOne(req, res) {
+
     repository.findAll()
         .then(result => {
             return res.status(200).send(result);
@@ -29,12 +30,8 @@ function findAll(req, res) {
         });
 }
 
-function findOne(req, res) {
-
-}
-
 function remove(req, res) {
 
 }
 
-module.exports = { create, findAll, findOne, remove };
+module.exports = { create, findOne, remove };
