@@ -8,11 +8,20 @@ client.on('connect', () => {
 });
 
 function create(user) {
-    return client.set(KEY, user, redis.print);
+    return new Promise((resolve, reject) => {
+        client.set(KEY, JSON.stringify(user), redis.print);
+        return resolve(user);
+    })
 }
 
 function findAll() {
-    client.get(KEY, (error, result) => result);
+    return new Promise((resole, reject) => {
+        client.get(KEY, (error, result) => {
+            if (error)
+                return reject(error);
+            return resole(result);
+        })
+    })
 }
 
 module.exports = { create, findAll }

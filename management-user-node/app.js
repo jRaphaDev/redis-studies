@@ -4,6 +4,9 @@ const controllers = require('./controller');
 const app = express();
 const router = express.Router();
 
+const bodyParser = require('body-parser');
+app.use(bodyParser.json());
+
 const port = 3001;
 
 app.use(controllers);
